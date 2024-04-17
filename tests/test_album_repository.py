@@ -26,16 +26,16 @@ def test_list_all_albums(db_connection):
         Album(12, "Ring Ring", 1973, 2)
         ]
 
-# """
-# When we call AlbumRepository#find
-# We get a single Album object reflecting the seed data.
-# """
-# def test_get_single_album(db_connection):
-#     db_connection.seed("seeds/music_library.sql")
-#     repository = AlbumRepository(db_connection)
+"""
+When we call AlbumRepository#find
+We get a single Album object reflecting the seed data.
+"""
+def test_get_single_album(db_connection):
+    db_connection.seed("seeds/music_library.sql")
+    repository = AlbumRepository(db_connection)
 
-#     album = repository.find(3)
-#     assert album == Album(3, "Waterloo", 1974, 2)
+    album = repository.find(3)
+    assert album == Album(3, "Waterloo", 1974, 2)
 
 # """
 # When we call AlbumRepo #create
