@@ -1,5 +1,5 @@
 from lib.artist import Artist
-
+from lib.album import Album
 class ArtistRepository:
 
     # We initialise with a database connection
@@ -34,3 +34,15 @@ class ArtistRepository:
         self._connection.execute(
             'DELETE FROM artists WHERE id = %s', [artist_id])
         return None
+    
+    def find_with_albums(self, artist_id):
+        rows = self._connection.execute('SELECT * FROM artists JOIN albums ON artists.id = albums.artist_id WHERE artists.id = %s', [artist_id])
+
+        
+        albums = []
+        for row in rows:
+            album = Album(row["id"], row["title"], row["release_year"], row["artist_id"])
+            albums.append(album)
+        artist = Artist(rows[0]["artist_id"], rows[0]["name"], rows[0]["genre"], albums)
+        return artist
+    
